@@ -428,7 +428,7 @@
           <!-- Add icons to the links using the .nav-icon class
                 with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="/" class="nav-link active">
+            <a href="/home" class="nav-link active">
                 <i class="fas fa-home"></i>
                 <p>Dashboard</p>
             </a>
@@ -443,9 +443,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/home/admin/seeManagers" class="nav-link">
+                <a href="/home/" class="nav-link">
                   <i class="fas fa-eye"></i>
-                  <p>See Manager</p>
+                  <p>See Employer</p>
                 </a>
               </li>
             </ul>
@@ -462,9 +462,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/home/admin/addManager" class="nav-link">
+                <a href="/home/create" class="nav-link">
                 <i class="fas fa-plus"></i>
-                  <p>Add Manager</p>
+                  <p>Add Employer</p>
                 </a>
               </li>
             </ul>

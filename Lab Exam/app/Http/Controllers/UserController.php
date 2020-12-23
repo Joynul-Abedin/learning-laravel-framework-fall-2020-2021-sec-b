@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+
 
 use Illuminate\Http\Request;
 
@@ -13,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.index');
     }
 
     /**
@@ -23,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('home.create');
     }
 
     /**
@@ -32,9 +34,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $req)
+    { 
+        $user = new User();
+        $user->name         = $req->name;
+        $user->email     = $req->email;
+        $user->password     = $req->password;
+
+
+        if($user->save()){
+            return redirect()->route('home');
+        }else{
+            return back();
+        }
     }
 
     /**

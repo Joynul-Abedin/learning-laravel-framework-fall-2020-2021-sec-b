@@ -24,3 +24,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/home/create', 'UserController@create')->name('home.create');
+Route::post('/home/create', 'UserController@store');
+Route::get('/home/user/edit/{id}', 'UserController@edit')->name('home.edit');
+Route::post('/home/user/edit/{id}', 'UserController@update');
+Route::get('/home/delete/{id}', 'UserController@delete');
+Route::post('/home/delete/{id}', 'UserController@destroy');
