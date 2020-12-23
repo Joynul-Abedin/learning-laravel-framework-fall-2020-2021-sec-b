@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\loginController;
+use App\Http\Controllers\logoutController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\employeeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,21 +17,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    echo('Welcome to Job Portal');
 });
 
-Auth::routes();
+Route::get('/login', [loginController::class,'index']);
+Route::post('/login', [loginController::class,'verify']);
+Route::get('/logout', [logoutController::class,'index']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware'=>['session']], function(){
 
-Auth::routes();
+	Route::get('/adminhome', [adminController::class,'adminhome'])->name('admin.home');
+	Route::get('/employeelist', [adminController::class,'employeelist'])->name('admin.employeelist');
+	Route::get('/createemployee', [adminController::class,'create'])->name('admin.createemployee');
+	Route::post('/createemployee', [adminController::class,'store']);
+	Route::get('/editemployee/{id}', [adminController::class,'edit'])->name('admin.editemployee');
+	Route::post('/editemployee/{id}', [adminController::class,'update']);
+	Route::get('/deleteemployee/{id}', [adminController::class,'delete'])->name('admin.deleteemployee');
+	Route::post('/deleteemployee/{id}', [adminController::class,'destroy']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+	Route::get('/employeehome', [employeeController::class,'employeehome'])->name('employee.home');
+	Route::get('/joblist', [employeeController::class,'employeelist'])->name('employee.joblist');
+	Route::get('/createjob', [employeeController::class,'create'])->name('employee.createjob');
+	Route::post('/createjob', [employeeController::class,'store']);
+	Route::get('/editjob/{id}', [employeeController::class,'edit'])->name('employee.editjob');
+	Route::post('/editjob/{id}', [employeeController::class,'update']);
+	Route::get('/deletejob/{id}', [employeeController::class,'delete'])->name('employee.deletejob');
+	Route::post('/deletejob/{id}', [employeeController::class,'destroy']);
 
-Route::get('/home/create', 'UserController@create')->name('home.create');
-Route::post('/home/create', 'UserController@store');
-Route::get('/home/user/edit/{id}', 'UserController@edit')->name('home.edit');
-Route::post('/home/user/edit/{id}', 'UserController@update');
-Route::get('/home/delete/{id}', 'UserController@delete');
-Route::post('/home/delete/{id}', 'UserController@destroy');
+});
